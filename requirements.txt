@@ -1,0 +1,11 @@
+torch>=2.1
+transformers>=4.48
+scikit-learn>=1.3
+numpy
+pandas
+pyyaml
+tqdm
+openai>=1.0
+# only needed for configs/other/deberta_claim_only.yaml
+sentencepiece
+protobuf

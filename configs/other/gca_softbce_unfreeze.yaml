@@ -1,0 +1,27 @@
+# Continue from the submitted model with the last two ModernBERT layers unfrozen.
+data:
+  train_files: [data/misinfo_SFT_train_for_cot_aug.json, data/misinfo_RL_train_for_cot_aug.json]
+  use_arguments: true
+  max_length: 1000
+  val_fraction: 0.2
+  split: ordered
+
+model:
+  encoder: answerdotai/ModernBERT-base
+  attention: gca
+
+train:
+  seed: 42
+  batch_size: 32
+  epochs: 100
+  patience: 6
+  monitor: auc
+  optimizer: adamw
+  lr: 3.0e-5
+  encoder_lr: 3.0e-6
+  unfreeze_last_n: 2
+  weight_decay: 0.05
+  loss: soft_bce
+  label_smoothing: 0.1
+  init_from: checkpoints/debate_gca_softbce.pt
+  output: checkpoints/gca_softbce_unfreeze.pt

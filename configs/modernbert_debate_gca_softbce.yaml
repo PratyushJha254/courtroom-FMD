@@ -1,0 +1,28 @@
+# Table 2, last row; step 2 of the two-step training. This is the submitted model.
+data:
+  train_files: [data/misinfo_SFT_train_for_cot_aug.json, data/misinfo_RL_train_for_cot_aug.json]
+  use_arguments: true
+  max_length: 1000
+  val_fraction: 0.2
+  split: ordered
+
+model:
+  encoder: answerdotai/ModernBERT-base
+  attention: gca
+
+train:
+  seed: 42
+  batch_size: 32
+  epochs: 100
+  patience: 6
+  monitor: auc
+  optimizer: adamw
+  lr: 5.0e-6
+  weight_decay: 0.05
+  loss: soft_bce
+  label_smoothing: 0.1
+  init_from: checkpoints/debate_gca.pt
+  output: checkpoints/debate_gca_softbce.pt
+
+predict:
+  max_length: 512

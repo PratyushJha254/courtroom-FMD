@@ -1,0 +1,25 @@
+# Three context vectors per channel instead of one.
+data:
+  train_files: [data/misinfo_SFT_train_for_cot_aug.json, data/misinfo_RL_train_for_cot_aug.json]
+  use_arguments: true
+  max_length: 1000
+  val_fraction: 0.2
+  split: ordered
+
+model:
+  encoder: answerdotai/ModernBERT-base
+  attention: multihead_gca
+  num_heads: 3
+  fc_hidden: 128
+
+train:
+  seed: 42
+  batch_size: 32
+  epochs: 100
+  patience: 6
+  monitor: auc
+  optimizer: adamw
+  lr: 1.0e-4
+  weight_decay: 0.05
+  loss: bce
+  output: checkpoints/multihead_gca.pt

@@ -1,0 +1,26 @@
+# Two rounds of prosecution and defense (needs the *_aug2.json files).
+data:
+  train_files: [data/misinfo_SFT_train_for_cot_aug2.json, data/misinfo_RL_train_for_cot_aug2.json]
+  use_arguments: true
+  max_length: 1500
+  val_fraction: 0.2
+  split: stratified
+  split_seed: 42
+
+model:
+  encoder: answerdotai/ModernBERT-base
+  attention: baseline
+  pool_kernel: 5
+
+train:
+  seed: 42
+  batch_size: 32
+  epochs: 100
+  patience: 7
+  monitor: auc
+  optimizer: adamw
+  lr: 1.0e-4
+  weight_decay: 0.01
+  grad_clip: 1.0
+  loss: bce
+  output: checkpoints/two_round_debate.pt

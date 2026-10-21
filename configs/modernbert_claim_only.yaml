@@ -1,0 +1,23 @@
+# Table 1, second row: frozen ModernBERT-base on the claim alone.
+data:
+  train_files: [data/misinfo_SFT_train_for_cot_aug.json]
+  use_arguments: false
+  max_length: 150
+  val_fraction: 0.2
+  split: ordered
+
+model:
+  encoder: answerdotai/ModernBERT-base
+  attention: baseline
+
+train:
+  seed: 42
+  batch_size: 16
+  epochs: 100
+  patience: 3
+  monitor: loss
+  optimizer: adamw
+  lr: 2.0e-5
+  weight_decay: 0.05
+  loss: bce
+  output: checkpoints/modernbert_claim_only.pt
