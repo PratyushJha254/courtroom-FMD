@@ -206,7 +206,8 @@ configs/          paper configs; configs/other/ for the experiments above
   title     = {Coherence at the Financial Misinformation Detection Challenge Task: A Courtroom-Inspired Framework for Reference-Free Verification},
   author    = {Jha, Pratyush},
   booktitle = {Workshop on Misinformation Detection in the Era of LLMs (MisD), ICWSM},
-  year      = {2026}
+  year      = {2026},
+  doi       = {https://doi.org/10.36190/2026.40}
 }
 ```
 
